@@ -1,0 +1,18 @@
+requests
+setuptools
+h5py
+
+decorator
+cython
+tqdm
+iteration_utilities
+
+unyt
+scipy
+numpy
+sympy
+
+pytest
+pytest-mpi
+
+neuron ; sys_platform=="linux" or sys_platform=="darwin"

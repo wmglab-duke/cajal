@@ -1,0 +1,5 @@
+name: cajal
+dependencies:
+  - python=3.9
+  - gxx_linux-64
+  - pip
