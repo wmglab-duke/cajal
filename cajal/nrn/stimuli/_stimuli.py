@@ -413,7 +413,7 @@ class Repeat(Stimulus):
     def timecourse(self, t):
         tshift = t - self.delay
         rem = tshift % (1 / self.freq)
-        return np.where(tshift < 0, 0, self.stim(rem))
+        return np.where(tshift < 0, 0, strip_units(self.stim(rem)))
 
     def __mul__(self, scale):
         return Repeat(self.stim * scale, self.freq, self.delay)
