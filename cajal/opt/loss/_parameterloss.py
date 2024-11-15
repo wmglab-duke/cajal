@@ -108,16 +108,9 @@ class TimecourseLoss(ParameterLoss):
 class Integral(TimecourseLoss):
     """Numerically integrate over timecourse array of a given stimulus."""
 
-    _method = {
-        "trapezoid": integrate.trapz,
-        "composite_trapezoid": integrate.cumtrapz,
-        "composite_simpson": integrate.simps,
-        "romberg": integrate.romb,
-    }
-
     def __init__(self, apply_to=None, method="trapezoid"):
         super(Integral, self).__init__(apply_to)
-        self.integrate_func = self._method[method]
+        self.integrate_func = getattr(integrate, method)
 
     def timecourse_func(self, t_course):
         return self.integrate_func(t_course, dx=h.dt)
