@@ -127,7 +127,10 @@ class Recorder:
                 )
             return self
         if isinstance(handle, str):
-            handle = h5py.File(handle, mode, driver="mpio", comm=COMM)
+            if MPISRC.ENABLED:
+                handle = h5py.File(handle, mode, driver="mpio", comm=COMM)
+            else:
+                handle = h5py.File(handle, mode)
         elif not isinstance(handle, h5py.File):
             raise TypeError(
                 "File handle must either be a string (a location on disk), or "
