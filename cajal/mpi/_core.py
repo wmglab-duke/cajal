@@ -995,7 +995,10 @@ class NeuronModel(ModelSpec, MPIRunner):
             self._mpi_model_group.attrs["n_intra"] = len(self.extra_specs)
             self._mpi_model_group.attrs["n_dim"] = self.ndim
             self._mpi_model_group.attrs["record_vars"] = f"{self.record_vars}"
-            self._submit_recordings = getattr(self, self._rec_submission[2])
+            if MPISRC.ENABLED:
+                self._submit_recordings = getattr(self, self._rec_submission[2])
+            else:
+                self._submit_recordings = getattr(self, self._rec_submission[0])
         return self
 
     def standard_io(self):
